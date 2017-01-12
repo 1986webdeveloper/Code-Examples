@@ -234,32 +234,13 @@ function pcauthor_co_author_options() {
 					<tr>
 						<th scope="row"><label for="blogname">Show the Metabox:</label></th>
 						<?php
-						//echo $_POST['screen'];exit;
+						
 							$args_types=array(
 								'public'	=> true, // publicaly visible
 							);
 							$post_types = get_post_types($args_types);
 						?>
-						<!--<td><select name="screen" id="screen">
-							<option value="null">-- Select Screen --</option>
-							<?php foreach ($post_types as $post_type) {
-								$obj = get_post_type_object( $post_type );
-								$option = get_option ('show_screen_metabox');
-								echo $_POST['screen'].'***'.$post_type.'---'.$option;
-								if($_POST['screen'] == $post_type) {
-									$selected = 'selected';
-								} else if($_POST['screen'] == 'null'){
-									$selected = '';
-								} else if($option == $post_type && $_POST['screen'] == ''){
-									$selected = 'selected';
-								} else {
-									$selected = '';
-								}
-								if($post_type != 'attachment' && $post_type != 'revision' && $post_type != 'nav_menu_item'){
-									echo '<option value="'.$post_type.'"'.$selected.'>'.$obj->labels->singular_name.'</option>';
-								}
-							} ?>
-						</select></td>-->
+						
 						<td>
 						<?php
 						$s = 0;
