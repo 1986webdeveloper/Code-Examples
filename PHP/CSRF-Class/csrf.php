@@ -2,7 +2,7 @@
 /**
  * Purpose of this class to implement more security in web application to avoid hacking
  * Using this class user can generate dynamic CSRF token before submitting to server and check weather is right token or not
- */
+ */ 
 
 class CSRF {
 
