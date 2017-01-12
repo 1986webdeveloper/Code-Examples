@@ -61,8 +61,6 @@ class Post_Co_Authors_Admin {
 	public function pcauthor_enqueue_styles() {
 
 		/**
-		 * This function is provided for demonstration purposes only.
-		 *
 		 * An instance of this class should be passed to the run() function
 		 * defined in Post_Co_Authors_Loader as all of the hooks are defined
 		 * in that particular class.
@@ -83,9 +81,7 @@ class Post_Co_Authors_Admin {
 	 */
 	public function pcauthor_enqueue_scripts() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
+		/**		
 		 * An instance of this class should be passed to the run() function
 		 * defined in Post_Co_Authors_Loader as all of the hooks are defined
 		 * in that particular class.

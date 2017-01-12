@@ -26,7 +26,7 @@
  */
 
 // If this file is called directly, abort.
-// pcauthor
+
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
@@ -239,8 +239,7 @@ function pcauthor_co_author_options() {
 								'public'	=> true, // publicaly visible
 							);
 							$post_types = get_post_types($args_types);
-						?>
-						
+						?>						
 						<td>
 						<?php
 						$s = 0;

@@ -22,10 +22,8 @@
  */
 class Post_Co_Authors_Deactivator {
 
-	/**
-	 * Short Description. (use period)
-	 *
-	 * Long Description.
+	/**	 
+	 * all hooks/actions fired on plugin deactivation.
 	 *
 	 * @since    1.0.0
 	 */

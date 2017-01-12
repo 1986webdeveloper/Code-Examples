@@ -14,10 +14,7 @@
  * - Repeat things for multisite. Once for a single site in the network, once sitewide.
  *
  * This file may be updated more in future version of the Boilerplate; however, this is the
- * general skeleton and outline for how the file should work.
- *
- * For more information, see the following discussion:
- * https://github.com/tommcfarlin/WordPress-Plugin-Boilerplate/pull/123#issuecomment-28541913
+ * general skeleton and outline for how the file should work.  
  *
  * @link       http://acquaintsoft.com/
  * @since      1.0.0
