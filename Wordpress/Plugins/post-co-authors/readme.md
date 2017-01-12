@@ -1,12 +1,19 @@
 #Post Co-Authors
 
 Contributors: itcoderr
+
 Donate link: http://acquaintsoft.com
+
 Tags: post,author,authors, multi-author,multi-authors, multi author,multi authors, custom post, dynamic authors
+
 Requires at least: 3.0.1
+
 Tested up to: 4.7
+
 Stable tag: 4.5.2
+
 License: GPLv2 or later
+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Post Co-Authors plugin allows you to select more then one authors in any post or custom post type.
