@@ -1,0 +1,38 @@
+* {margin: 0; padding: 0;}
+h3 {
+  font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+}
+li:hover {
+  background: #eee;
+}
+
+/*** Hotel booking system css by Acquaint SoftTech Pvt. Ltd.   ***/
+body{font-family:Helvetica, Verdana, sans-serif; font-size:14px; line-height:1.5;padding-top: 30px;}
+.container{width:600px; margin:0 auto;}
+.btn-by{float: right; display:block;position:relative;padding:0 12px;height:30px;line-height:30px;background:#1275ff;background-image:-webkit-linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);background-image:-moz-linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);background-image:-ms-linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);background-image:-o-linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);background-image:-webkit-linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);background-image:-moz-linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);background-image:-ms-linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);background-image:-o-linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);background-image:linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);font-size:14px;color:#fff;font-weight:bold;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;text-shadow:0 -1px 0 rgba(0,0,0,0.25);-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,0.25);-moz-box-shadow:inset 0 1px 0 rgba(255,255,255,0.25);-ms-box-shadow:inset 0 1px 0 rgba(255,255,255,0.25);-o-box-shadow:inset 0 1px 0 rgba(255,255,255,0.25);box-shadow:inset 0 1px 0 rgba(255,255,255,0.25);-webkit-border-radius:4px;-moz-border-radius:4px;-ms-border-radius:4px;-o-border-radius:4px;border-radius:4px; text-decoration:none;}
+.btn-submit{float: inherit; cursor:pointer;  margin: 11px;margin-left: 85px; border:none; display:block;position:relative;padding:0 12px;height:30px;line-height:30px;background:#1275ff;background-image:-webkit-linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);background-image:-moz-linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);background-image:-ms-linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);background-image:-o-linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);background-image:-webkit-linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);background-image:-moz-linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);background-image:-ms-linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);background-image:-o-linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);background-image:linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);font-size:14px;color:#fff;font-weight:bold;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;text-shadow:0 -1px 0 rgba(0,0,0,0.25);-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,0.25);-moz-box-shadow:inset 0 1px 0 rgba(255,255,255,0.25);-ms-box-shadow:inset 0 1px 0 rgba(255,255,255,0.25);-o-box-shadow:inset 0 1px 0 rgba(255,255,255,0.25);box-shadow:inset 0 1px 0 rgba(255,255,255,0.25);-webkit-border-radius:4px;-moz-border-radius:4px;-ms-border-radius:4px;-o-border-radius:4px;border-radius:4px; text-decoration:none;}
+.btn-submit:hover,
+.btn-by:hover{opacity:0.8;}
+.stripe-button-el{margin-top:15px !important; margin-left:15%;}
+.stripe-button-el:hover{opacity:0.8;}
+ul.hotel-list{border:1px solid #eee; width:100%; padding:0;}
+ul.hotel-list li{border-bottom:1px solid #eee; list-style-type:none; padding:20px; overflow:auto;}
+ul.hotel-list li img{float: left;
+  margin: 0 15px 0 0;
+  width: 200px;
+  height: 200px;}
+ul.hotel-list li:last-child{border-bottom:none;}
+.middle-box h1{background:#b5b4b4; width:100%; border:1px solid #eee; text-align:center;}
+.list-foter{padding-top:20px;}
+.list-foter .price{font-size:18px; font-weight:bold;}
+.web{border:1px solid #eee; width:100%; float:left;}
+.web h1{background:#b5b4b4; margin:0; font-size:18px; padding:5px 15px;}
+.detail-body{padding:15px;}
+.detail-body .hotel-name{font-size:18px;}
+.detail-body .hotel-price{display:block;	font-size:18px;}
+.payment-body{padding:15px;}
+.payment-body label{width: 15%; float:left; padding-top: 4px;}
+.payment-body span.val{ padding-top: 4px; display: inline-block; }
+.payment-body input{width: 79%; float:left; border:1px solid #ccc; height:25px; padding:0 15px; font-size: 14px}
+.payment-body textarea{width: 79%; float:left; border:1px solid #ccc; height:25px; height:150px; font-size:14px;resize:none; padding:15px;font-family:Helvetica, Verdana, sans-serif;}
+.payment-body p{width:100%; float:left; margin-bottom:15px;}
