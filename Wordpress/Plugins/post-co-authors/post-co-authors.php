@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The plugin bootstrap file
  *
@@ -32,6 +31,16 @@ if ( ! defined( 'WPINC' ) ) {
 }
 define( 'COAUTHORS_POST_VERSION', '3.2.1' );
 
+/* filter data i.e remove tags, escape html for securing data before storing to the database */
+function filter($data) {
+
+	$data = esc_html(trim(htmlentities(strip_tags($data))));
+
+	if (get_magic_quotes_gpc())
+		$data = stripslashes($data);
+
+	return $data;
+}
 /*---------------Main Plugin Class--------------*/
 class CoAuthors_Post {
 
@@ -141,19 +150,28 @@ class CoAuthors_Post {
 		$author = array();
 		$editor = array();
 		for ($i=1; $i <= $authors; $i++) { 
-			if($_POST['administrator'.$i] != ''){
-				$administrator[] = $_POST['administrator'.$i];
+			if(isset($_POST['administrator'.$i]) && $_POST['administrator'.$i] != ''){
+				$sel_admin=sanitize_text_field(filter($_POST['administrator'.$i]));
+				$sel_admin=filter_var( $sel_admin, FILTER_SANITIZE_NUMBER_INT );
+				$administrator[] = $sel_admin;
+
+
 			}
-			if($_POST['author'.$i] != ''){
-				$author[] = $_POST['author'.$i];
+			if(isset($_POST['author'.$i]) && $_POST['author'.$i] != ''){
+				$sel_author=sanitize_text_field(filter($_POST['author'.$i]));
+				$sel_author=filter_var( $sel_author, FILTER_SANITIZE_NUMBER_INT );
+				$author[] = $sel_author;
 			}
-			if($_POST['editor'.$i] != ''){
-				$editor[] = $_POST['editor'.$i];
+			
+			if(isset($_POST['editor'.$i]) && $_POST['editor'.$i] != ''){
+				$sel_editor=sanitize_text_field(filter($_POST['editor'.$i]));
+				$sel_editor=filter_var( $sel_editor, FILTER_SANITIZE_NUMBER_INT );				
+				$editor[] = $sel_editor;
 			}
 		}
 
 		/*------------- Administrator ----------------*/
-		$administrator = implode(',', $administrator);
+		$administrator = esc_html(trim(implode(',', $administrator)));
 		$auth_meta = get_post_meta($post_id, 'administrator_id');
 		if($auth_meta!= ''){
 			update_post_meta($post_id, 'administrator_id',  $administrator);
@@ -162,7 +180,7 @@ class CoAuthors_Post {
 		}
 
 		/*------------- Author ----------------*/
-		$author = implode(',', $author);
+		$author = esc_html(trim(implode(',', $author)));
 		$auth_meta = get_post_meta($post_id, 'author_id');
 		if($auth_meta!= ''){
 			update_post_meta($post_id, 'author_id',  $author);
@@ -171,7 +189,7 @@ class CoAuthors_Post {
 		}
 
 		/*------------- Editor ----------------*/
-		$editor = implode(',', $editor);
+		$editor = esc_html(trim(implode(',', $editor)));
 		$auth_meta = get_post_meta($post_id, 'editor_id');
 		if($auth_meta!= ''){
 			update_post_meta($post_id, 'editor_id',  $editor);
@@ -209,7 +227,7 @@ if (!function_exists('pcauthor_get_co_author')) {
 		}
 		asort($author_name);
 		foreach ($author_name as $key => $value) {
-			$author .= 'Author Name: <a target="_blank" href="'.$author_link[$key].'">'.$value.'</a><br>';
+			$author .= 'Author Name: <a target="_blank" href="'.esc_url($author_link[$key]).'">'.sanitize_title(esc_html($value)).'</a><br>';
 		}
 		return $author;
 	}
@@ -247,9 +265,10 @@ function pcauthor_co_author_options() {
 						foreach ($post_types as $post_type) {
 							$obj = get_post_type_object( $post_type );
 							$option = get_option ('show_screen_metabox');
-							if($_POST['screen-'.$s] != ''){
-								$screen[] = $_POST['screen-'.$s];
-							}
+							if(isset($_POST['screen-'.$s]) && $_POST['screen-'.$s] != ''){
+								$screen[] = sanitize_text_field(filter($_POST['screen-'.$s]));
+							}						
+						
 							if(!empty($option)){
 								if(in_array($post_type, $screen)){
 									$checked = 'checked';
@@ -278,13 +297,13 @@ function pcauthor_co_author_options() {
 		</form>
 	</div>
 	<?php
-	if(!empty($_POST)){
+	if(isset($_POST) && !empty($_POST)){
 		$post_types = get_post_types();
 		$s = 0;
 		$screen = array();
 		foreach ($post_types as $post_type) {
-			if($_POST['screen-'.$s] != ''){
-				$screen[] = $_POST['screen-'.$s];
+			if(isset($_POST['screen-'.$s]) && $_POST['screen-'.$s] != ''){				
+				$screen[] = sanitize_text_field(filter($_POST['screen-'.$s]));
 			}
 			$s++;
 		}
