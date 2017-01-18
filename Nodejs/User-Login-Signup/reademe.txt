@@ -22,7 +22,7 @@ Features
 * [Jade](http://jade-lang.com/) - HTML Templating Engine
 * [Stylus](http://stylus-lang.com/) - CSS Preprocessor
 * [Moment.js](http://momentjs.com/) - Lightweight Date Library
-
+* [Twitter Bootstrap] - UI Component & Layout Library
 
 ##Installation & Setup
 1. Install [Node.js](https://nodejs.org/) & [MongoDB](https://www.mongodb.org/) if you haven't already.
