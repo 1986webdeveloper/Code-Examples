@@ -14,8 +14,10 @@ Note: This is code ignitor code and is not workable standalone directly.
 6. Change/Add default rout in /application/config/route.php
 7. Copy controllers, models and view files to related folders.
 8. Change Stripe private secret key which is located at /application/controllers/Book.php at line no 101 you will find following code 
+	
 	>Stripe::setApiKey("STRIP_SECRET_KEY"); // STRIP_SECRET_KEY:- Your Stripe private secret key
 9) Change Stripe public secret key, Company Logo, Store Name, Item description  which is located at /application/views/details.php at line no 41 to 44 you will find following code
+	
 	>data-key="YOUR_STRIPE_PUBLIC_API_KEY" 
 	>data-image="YOUR_LOGO" 
  	>data-name="YOUR_STORE_NAME" 
