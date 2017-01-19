@@ -6,7 +6,7 @@ Note: This is code ignitor code and is not workable standalone directly.
 
 ## Steps to install this module in your Code Ignitor ##
 
-1. Download Hotel booking system 
+1. Download/Clone Hotel booking system 
 2. Import hotel_booking.sql in to your database
 3. Change database settings in /application/config/database.php
 4. Set base url in /applicaation/config/config.php
