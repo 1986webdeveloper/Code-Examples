@@ -98,7 +98,7 @@ class Book extends CI_Controller {
         $price = $_POST['price'];
         try {
             require_once('Stripe/lib/Stripe.php');
-            Stripe::setApiKey("STRIP_SECRET_KEY"); // STRIP_SECRET_KEY:- Your Stripe private secret key
+            Stripe::setApiKey("STRIPE_SECRET_KEY"); // STRIPE_SECRET_KEY:- Your Stripe private secret key
             $amount = $price * 100;
             $charge = Stripe_Charge::create(array(
                         "amount" => $amount,
