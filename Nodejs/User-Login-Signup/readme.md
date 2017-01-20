@@ -1,30 +1,32 @@
-###A basic Login and account management system built in Node.js with the following features:
+# Login and User Account Management System for NodeJS
 
-Features
-* Create New user account
-* View User profile
-* Ability to Update Account
-* Ability to Delete Account
-* User login
-* Blowfish-based Scheme Password Encryption
-* Validations
+
+
+## Features ##
+- Create New user account
+- View User profile
+- Ability to Update Account
+- Ability to Delete Account
+- User login
+- Blowfish-based Scheme Password Encryption
+- Validations
 	- Username and email are unique
 	- All fields are required
+- Notification as a popup when Update/Delete process is done.
 
-* Notification as a popup when Update/Delete process is done.
 
+## Node-Login is built on top of the following libraries ##
 
-###Node-Login is built on top of the following libraries :
+- [Node.js](http://nodejs.org/) - Application Server
+- [Express.js](http://expressjs.com/) - Node.js Web Framework
+- [MongoDb](http://mongodb.org/) - Database Storage
+- [Jade](http://jade-lang.com/) - HTML Templating Engine
+- [Stylus](http://stylus-lang.com/) - CSS Preprocessor
+- [Moment.js](http://momentjs.com/) - Lightweight Date Library
+- [Twitter Bootstrap] - UI Component & Layout Library
 
-* [Node.js](http://nodejs.org/) - Application Server
-* [Express.js](http://expressjs.com/) - Node.js Web Framework
-* [MongoDb](http://mongodb.org/) - Database Storage
-* [Jade](http://jade-lang.com/) - HTML Templating Engine
-* [Stylus](http://stylus-lang.com/) - CSS Preprocessor
-* [Moment.js](http://momentjs.com/) - Lightweight Date Library
-* [Twitter Bootstrap] - UI Component & Layout Library
+## Installation & Setup ##
 
-##Installation & Setup
 1. Install [Node.js](https://nodejs.org/) & [MongoDB](https://www.mongodb.org/) if you haven't already.
 2. Clone this repository and install its dependencies.
 		
@@ -53,6 +55,6 @@ Features
 
 
 
-##Contributing
+## Contributing ##
 
 Questions and suggestions for improvement are welcome.
