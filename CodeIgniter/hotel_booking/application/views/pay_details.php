@@ -1,15 +1,10 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
-/*
- * Author : Acquaint SoftTech Pvt. Ltd.
- * Author URL: http://acquaintsoft.com/  
- */
-?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Codeigniter- Payment - Aquaintsoft Tech</title>
+        <title>Codeigniter- Stripe Payment</title>
         <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
     </head>
     <body>
@@ -23,7 +18,9 @@
                         <h1>Order details</h1>
                         <div class="detail-body">
                             <span class="hotel-name">Hotel Name: <?php echo $row->hotel_name; ?> 
-                                <input type="hidden" value="<?php echo $row->hotel_name; ?>" name="name"/></span>
+                                <input type="hidden" value="<?php echo $row->hotel_name; ?>" name="name"/>
+                                <input type="hidden" value="<?php echo $row->id; ?>" name="booking_id"/>
+                            </span>
                             <span class="hotel-price">Price: $<?php echo $row->price; ?>
                                 <input type="hidden" value=" <?php echo $row->price; ?>" name="price"/></span>
                         </div>
@@ -36,13 +33,10 @@
                             <p><label>Address:</label> <textarea name="address" placeholder="Enter Address" required ></textarea>
                                 <button class="btn-submit" type="submit">Submit</button>
                         </div>
-
-
                     </form>
                     <?php
                 }
                 ?>
-
             </div>
         </div>
     </body>

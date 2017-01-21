@@ -6,9 +6,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * This is a simple Hotel booking system demo where user can book hotel using credit/debit card using Stripe payment gateway.
  * Book class. * 
  * @extends CI_Controller
- * Author : Acquaint SoftTech Pvt. Ltd.
- * Author URL: http://acquaintsoft.com/
- * 
  */
 class Book extends CI_Controller {
 
@@ -18,6 +15,7 @@ class Book extends CI_Controller {
      * @access public
      * @return void
      */
+    
     public function __construct() {
 
         parent::__construct();
@@ -63,16 +61,17 @@ class Book extends CI_Controller {
      * @return void
      */
     public function checkout() {
-        $email = $_POST['email'];
-        $price = $_POST['price'];
-        $fname = $_POST['fname'];
-        $lname = $_POST['lname'];
-        $phone = $_POST['pno'];
-        $add = $_POST['address'];
-        $Hotel = $_POST['name'];
+        $email = $this->input->post('email');
+        $price = $this->input->post('price');
+        $fname = $this->input->post('fname');
+        $lname = $this->input->post('lname');
+        $phone = $this->input->post('pno');
+        $address = $this->input->post('address');
+        $hotel_name = $this->input->post('name');
+        $booking_id = $this->input->post('booking_id');
 
         // --- Payment Details insert data pass in model --- //
-        $this->data = $this->book_model->form_details($fname, $lname, $phone, $add, $Hotel, $price, $email);
+        $this->data = $this->book_model->form_details($fname, $lname, $phone, $address, $hotel_name, $price, $email, $booking_id);
         $cid = $this->data;
         redirect('book/details/' . $cid);
     }
@@ -95,7 +94,7 @@ class Book extends CI_Controller {
      * @return void
      */
     public function checkout_details() {
-        $price = $_POST['price'];
+        $price = $this->input->post('price');
         try {
             require_once('Stripe/lib/Stripe.php');
             Stripe::setApiKey("STRIPE_SECRET_KEY"); // STRIPE_SECRET_KEY:- Your Stripe private secret key

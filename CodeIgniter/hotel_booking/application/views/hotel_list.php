@@ -1,11 +1,5 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); 
-/*
- * Author : Acquaint SoftTech Pvt. Ltd.
- * Author URL: http://acquaintsoft.com/  
- */
-?>
 <?php
-
+defined('BASEPATH') OR exit('No direct script access allowed');
 // Start:-When Stripe payment is done successfully then success popup is displayed.
 if (isset($_REQUEST['type'])) {
     ?>
@@ -15,18 +9,19 @@ if (isset($_REQUEST['type'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
             $("#myModal").modal('show');
-            setTimeout(function () {
+            setTimeout(function() {
                 $('#Modal').modal('hide')
             }, 4000);
 
         });
-        setTimeout(function () {
-            $('#myModal').modal('toggle'); }, 3000);
+        setTimeout(function() {
+            $('#myModal').modal('toggle');
+        }, 3000);
 
     </script>
-    <div id="myModal"  class="modal fade">
+    <div id="myModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -41,12 +36,11 @@ if (isset($_REQUEST['type'])) {
     </div>
     <?php
 }
-
 // End:-When Stripe payment is done successfully then success popup is displayed.
+$this->load->helper('url');
 ?>
-<?php $this->load->helper('url'); ?>
-<title>Codeigniter- Hotel Booking - Aquaintsoft Tech</title>
-<link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
+<title>Codeigniter - Hotel Booking </title>
+<link rel="stylesheet" href="<?php echo base_url('assets/css/style.css'); ?>">
 <div class="container">
     <div class="middle-box">
         <h1>Hotel List</h1>

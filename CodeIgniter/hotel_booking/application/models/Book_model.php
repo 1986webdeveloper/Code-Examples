@@ -1,5 +1,4 @@
 <?php
-
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
@@ -7,8 +6,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * 
  * @extends CI_Model
  * This is a simple Hotel booking system demo where user can book hotel using credit/debit card using Stripe payment gateway.
- * Author : Acquaint SoftTech Pvt. Ltd.
- * Author URL: http://acquaintsoft.com/  
  */
 
 class Book_model extends CI_Model {
@@ -57,13 +54,15 @@ class Book_model extends CI_Model {
      * @hotel varchar $Hotel
      * @price int $price
      * @email varchar $email
+     * @booking_id int $booking_id
      */
-    public function form_details($fname, $lname, $phone, $add, $Hotel, $price, $email) {
+    public function form_details($fname, $lname, $phone, $address, $Hotel, $price, $email, $booking_id) {
         $data = array(
+            'booking_id' => intval($booking_id),
             'fname' => $fname,
             'lname' => $lname,
             'p_no' => $phone,
-            'address' => $add,
+            'address' => $address,
             'hotel_name' => $Hotel,
             'price' => $price,
             'email' => $email,
