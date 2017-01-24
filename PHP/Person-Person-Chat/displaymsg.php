@@ -1,77 +1,72 @@
 <?php
-/* Created By Acquaint softTech pvt. ltd.
- * This module created for person to person chat.
- *   */
 include ("db.php");
 
 $beforins = $_SESSION['datacount'];
 
 //get total data after insert
-$selcomm = "select comm.*,log.id as logid,log.username from comment comm LEFT JOIN login log ON comm.cmt_by = log.id ORDER BY comm.id ASC";
-$resultcomm = mysql_query($selcomm);
-$afterins = mysql_num_rows($resultcomm);
+$selcomment = "select comm.*,log.id as logid,log.username from comment comm LEFT JOIN login log ON comm.cmt_by = log.id ORDER BY comm.id ASC";
+$resultcomment = mysqli_query($connection, $selcomment);
+$afterins = mysqli_num_rows($resultcomment);
 
-//check current data already inserted or not
+//check current date already inserted or not
 $ij = 0;
 $datenow = date('d-m-Y');
-  while ($rowdate = mysqli_fetch_assoc($resultcomm)) {
+while ($rowdate = mysqli_fetch_assoc($resultcomment)) {
     $cmtdate = date("d-m-Y", strtotime($rowdate['cmt_date']));
-    if($datenow == $cmtdate){
-      $ij++;
+    if ($datenow == $cmtdate) {
+        $ij++;
     }
-  }
-
+}
+//print_R($_SESSION);die;
 // select last inserted comment 
- $selQry = "select comm.*,log.id as logid,log.username,log.profile from comment comm LEFT JOIN login log ON comm.cmt_by = log.id ORDER BY comm.id ASC LIMIT ".$beforins.", ".$afterins;
-	
-$result = mysql_query($selQry);
-$date_cnt = mysql_num_rows($result);
+ $selQry = "select comm.*,log.id as logid,log.username,log.profile from comment comm LEFT JOIN login log ON comm.cmt_by = log.id ORDER BY comm.id ASC LIMIT " . $beforins . ", " . $afterins;
 
-if($date_cnt > 0){
-  while ($rowcomm = mysql_fetch_assoc($result)) {
+$result = mysqli_query($connection, $selQry);
+$date_cnt = mysqli_num_rows($result);
 
-    //not data repeted
-    if (in_array($rowcomm['id'], $_SESSION['commid']))
-    {
+if ($date_cnt > 0) {
+    while ($rowcomm = mysqli_fetch_assoc($result)) {
 
-    }
-    else{
-
-      $_SESSION['commid'][] .= $rowcomm['id']; //store comment id
-
-      if($afterins == 1 || $ij == 1) {?>
-  		<div class="sepraor-date"><span class="today-date">
-  		<?php echo date("M d Y", strtotime($rowcomm['created_date']));?>
-  		</span></div>
-  		<?php }
-
-
-      if($rowcomm['logid'] == $_SESSION['login']){
-        $classname = 'login-user-chat';
-      }else{
-        $classname = 'other-user-chat';
-      } ?>
-
-      <!-- start comment -->
-      <div class="<?php echo $classname; ?>"> 
-      <?php if($classname =='other-user-chat'){ ?>
-        <div class="login-profile">
-          <img width="100" height="100" src="<?php echo $rowcomm['profile']; ?>">
-        </div>
-      <?php } ?>       
-        <div class="chat-desc">
-          <span class="name-person"><?php echo $rowcomm['username']; ?></span>
-          <span class="description-chat">
-            <span class="des_40">        
-              <?php echo html_entity_decode($rowcomm['comment']);  ?>
-            </span>
-          </span>    
-          <span class="time"><?php  print date("h:i A", strtotime($rowcomm['created_date'])); ?></span>
-        </div>
-      </div> <!-- end comment -->
-  <?php  
-      } //end if
-  } //end while
+        //not data repeted
+        if (in_array($rowcomm['id'], $_SESSION['commid'])) {
+            
+        } else {
+            $_SESSION['commid'][] .= $rowcomm['id']; //store comment id
+            if ($afterins == 1 || $ij == 1) {
+                ?>
+                <div class="sepraor-date">
+                    <span class="today-date">
+                        <?php echo date("M d Y", strtotime($rowcomm['created_date'])); ?>
+                    </span>
+                </div>
+                <?php
+            }
+            if ($rowcomm['logid'] == $_SESSION['login']) {
+                $classname = 'login-user-chat';
+            } else {
+                $classname = 'other-user-chat';
+            }
+            ?>
+            <!-- start comment -->
+            <div class="<?php echo $classname; ?>"> 
+                <?php if ($classname == 'other-user-chat') { ?>
+                    <div class="login-profile">
+                        <img width="100" height="100" src="<?php echo $rowcomm['profile']; ?>">
+                    </div>
+                <?php } ?>       
+                <div class="chat-desc">
+                    <span class="name-person"><?php echo $rowcomm['username']; ?></span>
+                    <span class="description-chat">
+                        <span class="des_40">        
+                            <?php echo html_entity_decode($rowcomm['comment']); ?>
+                        </span>
+                    </span>    
+                    <span class="time"><?php print date("h:i A", strtotime($rowcomm['created_date'])); ?></span>
+                </div>
+            </div>
+            <!-- end comment -->
+            <?php
+        } //end if
+    } //end while
 } //end if
-
 ?>

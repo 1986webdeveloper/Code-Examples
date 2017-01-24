@@ -1,14 +1,15 @@
+
 <?php
-$username = "root"; // Db username
-$password = "root"; // Db password
-$hostname = "localhost"; // Db hostname
-$database = "chat_module"; // Db name
 
+$username = "root"; // DataBase username
+$password = "root"; // DataBase password
+$hostname = "localhost"; // DataBase hostname
+$database = "chat_module"; // DataBase name
 //connection to the database
-$dbhandle = mysql_connect($hostname, $username, $password);
+$connection = mysqli_connect($hostname, $username, $password);
 
-//select a database to work with
-$selected = mysql_select_db($database,$dbhandle);
+//select a database
+$selected = mysqli_select_db($connection, $database);
 
 error_reporting(0); //display error
 
