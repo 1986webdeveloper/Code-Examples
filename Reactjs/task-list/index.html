@@ -1,0 +1,362 @@
+<html>
+  <head>
+    <title>Manage Task List - Code Example</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="http://fb.me/react-0.11.1.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.11.1.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+  <div id="mountNode"></div>
+  
+  <div class="container">
+  
+	<div id="TaskListApp"></div>  
+  
+  </div>
+  <script type="text/jsx">
+      /** @jsx React.DOM */
+      /** TaskListApp variable for whole Task App */ 
+      var TaskListApp = React.createClass({
+		/** Get Default Tasks in list */  
+        getInitialState: function() {
+          return {tasklist:this.props.tasks};
+        },
+        /** Add New Task*/
+        handleNewTaskSubmit: function( newtask ) {
+          this.setState( {tasklist: this.state.tasklist.concat([newtask])} );
+        },
+        /** Remove Task */
+        handletaskRemove: function( task ) {
+          
+          var index = -1;
+         
+          var clength = this.state.tasklist.length;
+      		for( var i = 0; i < clength; i++ ) {
+				
+      			if( this.state.tasklist[i].taskname === task.taskname ) {
+      				index = i;
+      				break;
+      			}
+      		}
+      		this.state.tasklist.splice( index, 1 );	
+      		this.setState( {tasklist: this.state.tasklist} );
+        },
+        /** Task list as a Table View */
+        render: function() {
+          var tableStyle = {width: '100%'};
+          var leftTdStyle = {width: '50%',padding:'20px',verticalAlign: 'top'};
+          var rightTdStyle = {width: '50%',padding:'20px',verticalAlign: 'top'};
+          return ( 
+            <table style={tableStyle}>
+              <tr>
+                <td style={leftTdStyle}>
+                  <TaskList tlist={this.state.tasklist}  onTaskRemove={this.handletaskRemove}/>
+</td>
+<td style={rightTdStyle}>
+<NewRow onRowSubmit={this.handleNewTaskSubmit}/>
+</td>
+</tr>
+</table>
+          );
+        }
+      });
+      /** TaskList Variable for remove method */
+      var TaskList = React.createClass({
+        handletaskRemove: function(task){
+          this.props.onTaskRemove( task );
+        },
+        /** Display Tasks in Table */
+        render: function() {
+          var tasks = [];
+          var that = this; // TODO: Needs to find out why that = this made it work; Was getting error that onTaskDelete is not undefined
+          this.props.tlist.forEach(function(task) {
+            tasks.push(<Task task={task} onTaskDelete={that.handletaskRemove} /> );
+          });
+          return ( 
+<div>
+    <h3>Task List</h3>
+    <table className="table table-striped">
+        <thead><tr><th>Task Name</th><th>Description</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody>{tasks}</tbody>
+    </table>
+</div>
+            );
+        }
+      });     
+      
+      /** Task Variable to handle update and remove method */
+      var Task = React.createClass({
+                /** Hide popup - By default */	
+                getInitialState(){
+			return {view: {showModal: false}}
+		},
+		/** Hide modal */
+		handleHideModal(){
+			this.setState({view: {showModal: false}})
+		},
+		/** Show modal */
+		handleShowModal(){
+			/** Clear Add Form data */ 
+			$('#task').val("");
+			$('#desc').val("");
+			$('#status').val("");
+			/** Hide Add Form Error Message */ 
+			$('.errorTask_add').css("display","none");
+			$('.errorTask_add').html("");
+			$('.errorDesc_add').css("display","none");
+			$('.errorDesc_add').html("");
+			$('.errorStatus_add').css("display","none");
+			$('.errorStatus_add').html("");
+			/** Get Value from Update form */   
+			var taskname = this.props.task.taskname;
+			var status = this.props.task.status;
+			var description = this.props.task.description;
+			/** View Update Form Modal */
+			this.setState({view: {showModal: true}})
+		},
+		/** Update task */
+		handleUpdateTaskSubmit: function( newtask ) {
+			this.props.task.taskname=newtask.taskname;
+			this.props.task.description=newtask.description;
+			this.props.task.status=newtask.status;
+        },
+        /** Remove Task */
+         handleRemoveTask: function() {
+			/** Clear Add Form data */ 
+			$('#task').val("");
+			$('#desc').val("");
+			$('#status').val("");
+			/** Hide Add Form Error Message */ 
+			$('.errorTask_add').css("display","none");
+			$('.errorTask_add').html("");
+			$('.errorDesc_add').css("display","none");
+			$('.errorDesc_add').html("");
+			$('.errorStatus_add').css("display","none");
+			$('.errorStatus_add').html("");
+			/** Confirm Modal For Delete */ 
+			if(confirm('Are You Sure You Want to Delete This Task?')){
+		  		this.props.onTaskDelete( this.props.task );
+				return false;
+          }
+        },
+        /** Display Task List and Remove,Update button */ 
+        render: function() {
+			
+          return (
+<tr>
+    <td>{this.props.task.taskname}</td>
+    <td>{this.props.task.description}</td>
+    <td>{this.props.task.status}</td>
+    <td><a type="button"  className="btn btn-primary" value="" onClick={this.handleShowModal}><span className="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;
+        {this.state.view.showModal ? <Modal taskarray={this.props} handleHideModal={this.handleHideModal}  onRowUpdate={this.handleUpdateTaskSubmit}/> : null}
+<a type="button"  className="btn btn-danger" value="" onClick={this.handleRemoveTask}><span className="glyphicon glyphicon-remove"></span></a>
+
+</td>
+</tr>
+            );
+        }
+      });
+      /** NewRow variable to add new task in table row */
+       var NewRow = React.createClass({
+		/** Add New Task */
+        handleSubmit: function() {
+			var taskname = this.refs.taskname.getDOMNode().value;
+			var description = this.refs.description.getDOMNode().value;
+			var status = this.refs.status.getDOMNode().value;
+			var flag=0;
+			/** Validate Add Form Data */
+			if( taskname == '' ){
+				$('.errorTask_add').css("display","block");
+				$('.errorTask_add').html("Please enter Taskname");
+				flag=1;
+			} else {
+				$('.errorTask_add').css("display","none");
+				$('.errorTask_add').html("");
+			} 
+			if( description == '' ){
+				$('.errorDesc_add').css("display","block");
+				$('.errorDesc_add').html("Please enter Taskname");
+				flag=1;
+			} else {
+				$('.errorDesc_add').css("display","none");
+				$('.errorDesc_add').html("");
+			}
+			if( status == '' ){
+				$('.errorStatus_add').css("display","block");
+				$('.errorStatus_add').html("Please enter status");
+				flag=1;
+			} else {
+				$('.errorStatus_add').css("display","none");
+				$('.errorStatus_add').html("");
+			}
+			if(flag==0){
+				var newtaskrow = {taskname: taskname, description: description, status: status };
+				this.props.onRowSubmit( newtaskrow );          
+				this.refs.taskname.getDOMNode().value = '';
+				this.refs.description.getDOMNode().value = '';
+				this.refs.status.getDOMNode().value = '';
+				return false;
+			}
+			else {
+				return false;
+			}
+        },
+        /** Display Add Form */ 
+        render: function() {
+          var inputStyle = {padding:'12px'}
+          return ( 
+<div className="well">
+    <h3>Add New Task</h3> 
+    <form onSubmit={this.handleSubmit} className="form-horizontal">
+
+        {/* Task Name */}
+        <label className="control-label col-sm-3 label-class">Task Name:</label>
+        <div className="input-group col-sm-8" style={inputStyle}>
+            <input type="text"  className="form-control"  placeholder="Task Name" ref="taskname" id='task' />
+        </div>
+        <div className="errorTask_add">fds
+        </div>
+        {/* Description */}
+        <label className="control-label col-sm-3 label-class">Description:</label>
+        <div className="input-group col-sm-8" style={inputStyle}>
+            <textarea className="form-control" rows="10" placeholder="Description" ref="description" id='desc' ></textarea>
+        </div>
+        <div className="errorDesc_add">fds
+        </div>
+
+        {/* Status */}
+        <label className="control-label col-sm-3 label-class">Status:</label>
+        <div className="input-group col-sm-8" style={inputStyle}>
+            <select className="form-control" ref="status" id='status' >
+                <option value="">Select</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+            </select>
+        </div>
+        <div className="errorStatus_add">fds
+        </div>
+        <div className="" style={inputStyle}>
+            <input type="submit"  className="btn btn-primary pull-right" value="Add Task"/>
+        </div>
+    </form>
+</div>
+            );
+        }
+      });
+	{/*Start Update Task Modal*/}
+   let Modal = React.createClass({
+    componentDidMount(){
+		var taskname= this.props.taskarray.task.taskname;
+		var description= this.props.taskarray.task.description;
+		var status= this.props.taskarray.task.status;
+		this.refs.taskname.getDOMNode().value=taskname;
+		this.refs.description.getDOMNode().value=description;
+		this.refs.status.getDOMNode().value=status;
+        $(this.getDOMNode()).modal('show');
+        $(this.getDOMNode()).on('hidden.bs.modal', this.props.handleHideModal);
+    },
+   /** Update Task */
+    handleChange: function() {
+          var taskname = this.refs.taskname.getDOMNode().value;
+          var description = this.refs.description.getDOMNode().value;
+          var status = this.refs.status.getDOMNode().value;
+          var flag = 0;
+          /** Validate Update Form Data */
+			if( taskname == '' ){
+				$('.errorTask').css("display","block");
+				$('.errorTask').html("Please enter Taskname");
+				flag='1';
+			} else {
+				$('.errorTask').css("display","none");
+				$('.errorTask').html("");
+			} 
+			if( description == '' ){
+				$('.errorDesc').css("display","block");
+				$('.errorDesc').html("Please enter Taskname");
+				flag=1;
+			} else {
+				$('.errorDesc').css("display","none");
+				$('.errorDesc').html("");
+			}
+			if( status == '' ){
+				$('.errorStatus').css("display","block");
+				$('.errorStatus').html("Please enter status");
+				flag=1;
+			} else {
+				$('.errorStatus').css("display","none");
+				$('.errorStatus').html("");
+			}
+			if(flag==0){
+				var newtaskrow = {taskname: taskname, description: description, status: status };
+				this.props.onRowUpdate( newtaskrow );
+				this.refs.taskname.getDOMNode().value = '';
+				this.refs.description.getDOMNode().value = '';
+				this.refs.status.getDOMNode().value = '';
+				$('.modal').modal('hide');
+			}
+		},
+	/** Display Update Form Modal */
+    render(){
+		var inputStyle = {padding:'12px'}
+        return (
+<div className="modal fade">
+    <div className="modal-dialog">
+        <div className="modal-content">
+            <div className="modal-header">
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 className="modal-title">Edit Task</h4>
+            </div>
+            <div className="modal-body">
+                <form className="form-horizontal">
+                    {/* Task Name */}
+                    <label className="control-label col-sm-3 label-class">Task Name:</label>
+                    <div className="input-group col-sm-8" style={inputStyle}>
+                        <input type="text"  className="form-control"  placeholder="Task Name" ref="taskname" required="required" />
+                    </div>
+                    <div className="errorTask">fds
+                    </div>
+
+                    {/* Description */}
+                    <label className="control-label col-sm-3 label-class">Description:</label>
+                    <div className="input-group col-sm-8" style={inputStyle}>
+                        <textarea className="form-control" rows="10" placeholder="Description" ref="description" required="required" ></textarea>
+                    </div>
+                    <div className="errorDesc">fds
+                    </div>
+
+                    {/* Status */}
+                    <label className="control-label col-sm-3 label-class">Status:</label>
+                    <div className="input-group col-sm-8" style={inputStyle}>
+                        <select className="form-control" ref="status" required="required" >
+                            <option value="">Select</option>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+                    <div className="errorStatus">fds
+                    </div>
+
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="button"  className="btn btn-primary"  value="Update Task" onClick={this.handleChange} />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+        )
+    }
+});
+{/*End Update Task Modal*/}
+	  /** Default Value array */
+      var defTasks = [{taskname:"Node Js assignment",description:"Create demo",status:"Inactive"},{taskname:"React Js assignment",description:"Learn Basic",status:"Active"}];
+      React.renderComponent( <TaskListApp tasks={defTasks}/>, document.getElementById( "TaskListApp" ) );
+    </script>
+  </body>
+</html>
+

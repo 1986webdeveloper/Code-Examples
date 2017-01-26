@@ -1,0 +1,31 @@
+.label-class { margin-top:15px; } 
+.errorTask , .errorDesc ,.errorStatus{
+	display:none;
+	background: #ff4c4c none repeat scroll 0 0;
+	border-radius: 0 0 5px 5px;
+	color: #fff; 
+	margin-bottom: 1px; 
+	padding: 2px 2px 2px 15px; 
+	margin-left:155px;
+	width:353px;
+}
+.errorTask_add , .errorDesc_add ,.errorStatus_add{
+	display:none;
+	background: #ff4c4c none repeat scroll 0 0;
+	border-radius: 0 0 5px 5px;
+	color: #fff; 
+	margin-bottom: 1px;
+	padding: 2px 2px 2px 15px;
+	margin-left:135px; 
+	width:302px;
+}
+label {
+	font-weight:100
+} 
+.input-group, .col-sm-8{ 
+	padding-bottom:0px !important;
+} 
+.modal-footer {
+	margin-top : 8px; 
+}
+
