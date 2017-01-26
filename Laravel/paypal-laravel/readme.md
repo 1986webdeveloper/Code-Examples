@@ -22,7 +22,7 @@ This is a very simple and easy demo to integrate Paypal IPN method in laravel 5.
     - Copy app/Http/Controllers/PaypalController.php to app/Http/Controllers/ folder
 
     - Copy config/paypal.php to config/ folder
-
+ 
     - Copy public/images folder to public/
 
     - Copy resources/layouts folder to resources/
