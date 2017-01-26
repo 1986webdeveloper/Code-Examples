@@ -34,9 +34,13 @@ This is a very simple and easy demo to integrate Paypal IPN method in laravel 5.
 
 
     Route::resource('/','PaypalController');
+
     Route::post('afterpayment', ['uses' => 'PaypalController@afterPayment']);
+
     Route::get('cancelpayment', ['uses' => 'PaypalController@cancelPayment']);
+
     Route::get('successpayment', ['uses' => 'PaypalController@successPayment']);
+
 
 		
 5. Open a browser window and navigate to: [http://localhost/Your project name]
