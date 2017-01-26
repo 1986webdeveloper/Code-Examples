@@ -19,15 +19,15 @@ To represent more features in one application we use bootstrap model for edit an
 
 ## Library list which are used in this application ##
 
--React Js (<script src="http://fb.me/react-0.11.1.js"></script>)
+-React Js 
 
--JSTransform Library (<script src="http://fb.me/JSXTransformer-0.11.1.js"></script>)
+-JSTransform Library 
 
--jQuery	(<script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>)
+-jQuery	
 
--Bootstrap css (<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">)
+-Bootstrap css 
 
--Bootstrap modal(<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script><script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>)
+-Bootstrap modal
 
 
 
