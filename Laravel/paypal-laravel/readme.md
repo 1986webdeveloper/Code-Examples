@@ -1,4 +1,6 @@
-# This is a very simple and easy demo to integrate Paypal IPN method in laravel 5.3, which is mainly for beginners.
+# Paypal IPN in Laravel 5.3
+
+This is a very simple and easy demo to integrate Paypal IPN method in laravel 5.3, which is mainly for beginners.
 
 
 ## Features ##
